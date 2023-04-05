@@ -12,26 +12,41 @@ import HomelyIllustration from "./components/HomelyIllustration/HomelyIllustrati
 import {APIProvider} from './hooks/useAPI';
 import ImageGallery from "./components/ImageGallery/ImageGallery";
 import ProtectedRoute from "./components/ProtectedRoutes/ProtectedRoute";
-import AdsList from "./components/AdsList/AdsList";
+import AllAdsList from "./components/AllAdsList/AllAdsList";
+import CreateAdForm from "./components/CreateAdForm/CreateAdForm";
+import SideBar from "./components/SideBar/SideBar"
+import MyAds from "./components/MyAds/MyAds";
 
 function App() {
   return (
-    <BrowserRouter>
-      <Wrapper>
+    <Wrapper>
+      <BrowserRouter>
+      
         <APIProvider>
           <Header />
           <Main>  
             <Routes>
               <Route path='/' element={
                 <>
-                  <ImageGallery/>
-                  <HomelyIllustration/>
+                  <SideBar/>
+                  <AllAdsList />
                   
                 </>
               } />
-              <Route path='/advertisements' element={
+              <Route path='/ads' element={
                 <>
-                  <AdsList />
+                  <SideBar />
+                  <AllAdsList />
+                </>
+              } />
+              <Route path='/users/:id/ads' element={
+                <>
+                  <MyAds/>
+                </>
+              } />
+              <Route path='/adform' element={
+                <>
+                  <CreateAdForm />
                 </>
               } />
               <Route path='/login' element={
@@ -56,16 +71,17 @@ function App() {
           </Main>
           <Footer />
         </APIProvider>
-      </Wrapper>
-    </BrowserRouter>
+      </BrowserRouter> 
+    </Wrapper>
   )
 }
 
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  height: 100%;
+  min-height: 100%;
   width: 100%;
+  justify-content: space-between;
 `;
 
 export default App

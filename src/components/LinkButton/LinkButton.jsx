@@ -24,6 +24,13 @@ const style = `
   width: 150px;
   text-align: center;
   border-radius: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &:hover {
+    text-decoration: revert;
+  }
 `;
 
 const Button = styled.button`${style}`;

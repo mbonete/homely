@@ -10,11 +10,13 @@ function Footer() {
 }
 
 const Wrapper = styled.div`
+  position: sticky;
+  bottom: 0;
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 10%;
+  height: 50px;
   background-color: navy;
 `;
 

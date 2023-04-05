@@ -16,11 +16,10 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
 import { useAPI } from '../../hooks/useAPI';
+import ErrorMessage from '../ErrorMessage/ErrorMessage';
 
 const schema = yup.object({
   email: yup.string().email().required(),
-  password: yup.string().min(5).required(),
-
 }).required();
 
 function Copyright(props) {
@@ -40,10 +39,9 @@ const theme = createTheme();
 
 function LogInForm() {
 
-  const { register, handleSubmit, formState:{ errors } } = useForm({
-    resolver: yupResolver(schema)
-  });
+  const { register, handleSubmit, formState:{ errors } } = useForm({resolver: yupResolver(schema)});
   const {login} = useAPI();
+  console.log(errors)
 
   return (
     <ThemeProvider theme={theme}>
@@ -63,22 +61,21 @@ function LogInForm() {
           <Typography component="h1" variant="h5">
             Log in
           </Typography>
-          <Box component="form" onSubmit={handleSubmit(login)} noValidate sx={{ mt: 1 }}>
+          <Box component="form" onSubmit={handleSubmit(login)} sx={{ mt: 1 }}>
             <TextField
               {...register("email")} 
-              type="email" 
-              placeholder='Email'
               margin="normal"
+              placeholder='Email'
               fullWidth
               autoFocus
+              type="email"
             />
             <TextField
               margin="normal"
               fullWidth
               {...register("password")} 
-              type="password" 
               placeholder='Password'
-              autoComplete="current-password"
+              type="password"
             />
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}

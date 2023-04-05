@@ -2,38 +2,43 @@ import React from 'react';
 import styled from 'styled-components';
 import { useAPI } from '../../hooks/useAPI';
 import LinkButton from '../LinkButton/LinkButton';
-import MenuProfile from '../MenuProfile/MenuProfile';
+
 
 function Profile() {
-  const { logout } = useAPI();
+  const { logout, currentUser } = useAPI();
 
   return (
     <Wrapper>
-      <MenuWrapper>
-        <MenuProfile />
+      <p>Name: {currentUser.name}</p>
+      <p>ID: {currentUser.id}</p>
+      <p>Email: {currentUser.email}</p>
+      <ButtonWrapper>
+        <LinkButton style={{fontSize: '1rem', backgroundColor: 'orange'}} to={`/users/${currentUser.id}/ads`}>My ads</LinkButton>
         <LinkButton style={{fontSize: '1rem'}} onClick={logout}>Log out</LinkButton>
-      </MenuWrapper>
+      </ButtonWrapper>
     </Wrapper>
   )
 }
 
 const Wrapper = styled.div`
   display: flex;
-  height: 100%;
-  width: 60%;
-  justify-content: center;
-  gap: 32px;
-  padding: 32px;
-
-}`;
-
-const MenuWrapper = styled.div`
-  height: 100%;
-  width: 40%;
-  display: flex;
   flex-direction: column;
-  align-items: flex-end;
-  justify-content: space-between;
+  height: 100%;
+  width: 50%;
+  justify-content: flex-start;
+  align-content: center;
+  padding: 32px;
+  background-color: lightgray;
+  gap: 8px;
+
 }`;
+
+const ButtonWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 16px;
+`;
+
 
 export default Profile;

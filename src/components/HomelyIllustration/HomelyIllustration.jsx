@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 
-function HomelyIllustration() {
+function HomelyIllustration({...delegated}) {
   return (
-    <IllustrationWrapper>
+    <IllustrationWrapper {...delegated}>
       <SVG src='/HomelyLogo.svg' alt='' />
     </IllustrationWrapper>
   )

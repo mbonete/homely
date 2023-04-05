@@ -16,12 +16,12 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
 import { useAPI } from '../../hooks/useAPI';
+import ErrorMessage from '../ErrorMessage/ErrorMessage'
 
 const schema = yup.object({
   name: yup.string().required(),
   email: yup.string().email().required(),
   password: yup.string().min(5).required(),
-
 }).required();
 
 function Copyright(props) {
@@ -68,26 +68,22 @@ function SignUpForm() {
           <Typography component="h1" variant="h5">
             Sign up
           </Typography>
-          <Box component="form" noValidate onSubmit={handleSubmit(createAndLogin)} sx={{ mt: 3 }}>
+          <Box component="form"  onSubmit={handleSubmit(createAndLogin)} sx={{ mt: 3 }}>
             <Grid container spacing={2}>
               <Grid item xs={12}>
                 <TextField
-                  autoComplete="given-name"
                   {...register("name")} 
                   placeholder='Name'
                   fullWidth
                   autoFocus
                 />
-                
               </Grid>
-
               <Grid item xs={12}>
                 <TextField
                   fullWidth
                   {...register("email")} 
                   type="email" 
                   placeholder="Email"
-                  autoComplete="email"
                 />
               </Grid>
               <Grid item xs={12}>
@@ -96,8 +92,8 @@ function SignUpForm() {
                   {...register("password")} 
                   type="password" 
                   placeholder="Password"
-                  autoComplete="new-password"
                 />
+               {errors.password && <ErrorMessage>{errors.password.message}</ErrorMessage>}
               </Grid>
               <Grid item xs={12}>
                 <FormControlLabel

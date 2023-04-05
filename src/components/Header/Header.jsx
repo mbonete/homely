@@ -1,34 +1,45 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Home } from 'react-feather';
 import Avatar from '@mui/material/Avatar';
-
 import LinkButton from '../LinkButton/LinkButton';
+import AddHomeOutlinedIcon from '@mui/icons-material/AddHomeOutlined';
 import { Link } from 'react-router-dom';
 import { useAPI } from '../../hooks/useAPI';
 
 function Header() {
-  const { isLoggedIn, currentUserId, currentUserName } = useAPI();
+  const { isLoggedIn, currentUser } = useAPI();
+  const { id, name } = currentUser || {};
+
   return (
     <Wrapper>
       <MaxWidthWrapper>
-        <LogoAnchor to='/' alt='brand logo anchor'>
-          <Home size={32} color='white' style={{marginBottom: '5px', marginRight: '-5px'}}/>
-          <BrandName>Homely</BrandName>
-        </LogoAnchor>
+        <NavWrapper>
+          <LogoAnchor to='/' alt='brand logo anchor'>
+            Homely
+          </LogoAnchor>
+          <LinkButton to='/ads' style={{backgroundColor: 'transparent', color: 'white', padding: '0'}}>All ads</LinkButton>
+          {isLoggedIn && <LinkButton style={{backgroundColor: 'transparent', color: 'white', padding: '0'}} to={`/users/${currentUser.id}/ads`}>My ads</LinkButton>}
+        </NavWrapper>
+
+        <ButtonWrapper>
         {isLoggedIn ? (
-          <BtnWrapper>
-            <Span>Hello {currentUserName}!</Span>
-            <Link to={`/users/${currentUserId}`} style={{textDecoration: 'none'}}>
+          <>
+            <LinkButton to='/adform' style={{backgroundColor: 'orange', borderRadius: '50px', marginRight: '16px'}}>
+              <AddHomeOutlinedIcon style={{fontSize: '1.75rem', marginBottom: '4px', marginRight: '4px'}} />
+              List your property
+            </LinkButton>
+            <Span>Hello {name}!</Span>
+            <Link to={`/users/${id}`} style={{textDecoration: 'none'}}>
               <Avatar sx={{ bgcolor: 'white', color: 'navy'}}>MB</Avatar>
             </Link>
-          </BtnWrapper>
+          </>
         ) : (
-          <BtnWrapper>
+          <>
             <LinkButton to='/login'>Log in</LinkButton>
             <LinkButton to='/signup' style={{backgroundColor: 'orange'}}>Sign up</LinkButton>
-          </BtnWrapper>
+          </>  
         )}
+        </ButtonWrapper>
       </MaxWidthWrapper>
     </Wrapper>
   ) 
@@ -36,9 +47,14 @@ function Header() {
 
 const Wrapper = styled.div`
   width: 100%;
-  height: 10%;
+  height: 75px;
   background-color: navy;
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  isolation: isolate;
 `;
+
 
 const MaxWidthWrapper = styled.div`
   display: flex;
@@ -55,22 +71,29 @@ const LogoAnchor = styled(Link)`
   display: flex;
   text-decoration: none;
   background-color: transparent;
+  font-size: 2rem;
+  color: white;
   border: transparent;
   cursor: pointer;
   align-items: center;
-  gap: 16px;
   padding: 0;
 `;
 
-const BrandName = styled.h1`
-  font-size: 2rem;
-  color: white;
-`;
 
-const BtnWrapper = styled.div`
+const NavWrapper = styled.nav`
   display: flex;
   gap: 16px;
   align-items: baseline;
+  justify-content: flex-start;
+  width: 50%;
+`;
+
+const ButtonWrapper = styled.div`
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  justify-content: flex-end;
+  width: 50%;
 `;
 const Span = styled.span`
   color: white;

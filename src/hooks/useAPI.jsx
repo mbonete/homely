@@ -1,74 +1,74 @@
 import React, { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-
+import ErrorMessage from '../components/ErrorMessage/ErrorMessage';
 
 const APIContext = React.createContext();
 
+const client = axios.create({
+  baseURL: 'http://localhost:3000',
+});
+
 export function APIProvider({children}) {
   const navigate = useNavigate();
-  const client = axios.create({
-    baseURL: 'http://localhost:3000',
-  });
 
-  const setClientAuth = (token) => {
-    console.log('debug', 'setting token', token)
+  const authenticateAxios = (token) => {
     client.defaults.headers.common['Authorization'] = token ? `Bearer ${token}` : undefined;
   }
 
-  const [currentUserId, setCurrentUserId] = useState('');
-  const [currentUserName, setCurrentUserName] = useState('');
+  const [currentUser, setCurrentUser] = useState(null);
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  console.log('debug', 'isLoggedIn', isLoggedIn)
 
   useEffect(() => {
     const token =  localStorage.getItem('token');
-    const name = localStorage.getItem('name');
+    const user = localStorage.getItem('user');
     if (!token) return;
-    if(!name) return
     
-    setClientAuth(token);
-    setCurrentUserName(name);
+    authenticateAxios(token);
+    if (user) setCurrentUser(JSON.parse(user));
     setIsLoggedIn(true);
   }, []);
 
   const login = async (credentials) => {
     const response = await client.post('/tokens', credentials);
-    console.log(response)
-    if(response.status === 401) return;
+    if(response.status === 401) {
+      console.log('Email or password are incorrect');
+      return;
+    };
     const { accessToken } = response.data;
-    const { id, name } = response.data.user;
+    const { user } = response.data;
     setIsLoggedIn(true);  
     // Guardamos el token en el localStorage por si refrescamos la pagina
     // o abrimos un tab nuevo
     localStorage.setItem('token', accessToken);
-    localStorage.setItem('name', name);
+    localStorage.setItem('user', JSON.stringify(user));
     // Modificamos el cliente de axios para que inserte la cabecera "Authorization"
     // en cada peticion a partir de ahora. El contenido de esta cabecera tiene que tener
     // el formato `Bearer ${accessToken}`
-    setClientAuth(accessToken);
-    setCurrentUserId(id);
-    setCurrentUserName(name);
-    navigate(`/users/${id}`)
+    authenticateAxios(accessToken);
+    setCurrentUser(user);
+    navigate(`/ads`)
     return response;
   }
 
   const logout = () => {
-    setClientAuth();
+    authenticateAxios();
     setIsLoggedIn(false);
-    setCurrentUserId('');
-    setCurrentUserName('');
+    setCurrentUser(null);
     navigate('/');
     localStorage.removeItem('token');
-    localStorage.removeItem('name');
+    localStorage.removeItem('user');
   };
 
   const createUser = (user) => client.post('/users', user);
 
+  const createAd = (ad) => {
+    return client.post('/ads', ad);
+  }
+
   const getAds = () => {
-    console.log(client.defaults.headers.common['Authorization']);
     return client.get('/ads');
   }
 
@@ -76,10 +76,10 @@ export function APIProvider({children}) {
     login,
     logout,
     createUser,
+    createAd,
     getAds,
     isLoggedIn,
-    currentUserId,
-    currentUserName,
+    currentUser,
   }
 
   return (
