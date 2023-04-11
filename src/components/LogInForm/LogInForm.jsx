@@ -15,6 +15,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
+import { useMutation } from '@tanstack/react-query';
 import { useAPI } from '../../hooks/useAPI';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
 
@@ -39,9 +40,14 @@ const theme = createTheme();
 
 function LogInForm() {
 
-  const { register, handleSubmit, formState:{ errors } } = useForm({resolver: yupResolver(schema)});
+  const { register, handleSubmit, formState } = useForm({resolver: yupResolver(schema)});
   const {login} = useAPI();
-  console.log(errors)
+
+  const { mutate, isError, error } = useMutation({
+    mutationFn: login,
+  })
+
+  const areCredentialsWrong = error?.response?.status === 401;
 
   return (
     <ThemeProvider theme={theme}>
@@ -61,7 +67,7 @@ function LogInForm() {
           <Typography component="h1" variant="h5">
             Log in
           </Typography>
-          <Box component="form" onSubmit={handleSubmit(login)} sx={{ mt: 1 }}>
+          <Box component="form" onSubmit={handleSubmit(mutate)} sx={{ mt: 1 }}>
             <TextField
               {...register("email")} 
               margin="normal"
@@ -89,6 +95,7 @@ function LogInForm() {
             >
               Log In
             </Button>
+            {areCredentialsWrong && <ErrorMessage>Invalid credentials</ErrorMessage>}
             <Grid container>
               <Grid item xs>
                 <Link href="#" variant="body2">

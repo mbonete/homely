@@ -15,11 +15,12 @@ import * as yup from "yup";
 import styled from 'styled-components';
 import { useAPI } from '../../hooks/useAPI';
 import { useNavigate } from 'react-router-dom';
+import ErrorMessage from '../ErrorMessage/ErrorMessage'
 
 const schema = yup.object({
-  title: yup.string().required(),
-  summary: yup.string().required(),
-  details: yup.string().required(),
+  title: yup.string().min(10).required(),
+  summary: yup.string().min(10).required(),
+  details: yup.string().min(10).required(),
 }).required();
 
 export default function CreateAdForm() {
@@ -60,6 +61,7 @@ export default function CreateAdForm() {
                   fullWidth
                   variant="standard"
                 />
+                {errors?.title && <ErrorMessage>{errors.title.message}</ErrorMessage>}
               </Grid>
 
               <Grid item xs={12}>
@@ -70,6 +72,7 @@ export default function CreateAdForm() {
                   multiline
                   rows={2}
                 />
+                {errors?.summary && <ErrorMessage>{errors.summary.message}</ErrorMessage>}
               </Grid>
               <Grid item xs={12}>
                 <TextField
@@ -79,6 +82,7 @@ export default function CreateAdForm() {
                   multiline
                   rows={4}
                 />
+                {errors?.details && <ErrorMessage>{errors.details.message}</ErrorMessage>}
               </Grid>
               <Grid item xs={12}>
                 <label htmlFor="file" style={{color: 'gray'}}>Upload picture:</label>

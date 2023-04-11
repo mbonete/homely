@@ -8,7 +8,6 @@ import Footer from "./components/Footer/Footer";
 import LogInForm from './components/LogInForm';
 import Profile from "./components/Profile";
 import SignUpForm from './components/SignUpForm'
-import HomelyIllustration from "./components/HomelyIllustration/HomelyIllustration";
 import {APIProvider} from './hooks/useAPI';
 import ImageGallery from "./components/ImageGallery/ImageGallery";
 import ProtectedRoute from "./components/ProtectedRoutes/ProtectedRoute";
@@ -16,6 +15,7 @@ import AllAdsList from "./components/AllAdsList/AllAdsList";
 import CreateAdForm from "./components/CreateAdForm/CreateAdForm";
 import SideBar from "./components/SideBar/SideBar"
 import MyAds from "./components/MyAds/MyAds";
+import EditAdForm from "./components/EditAdForm/EditAdForm";
 
 function App() {
   return (
@@ -47,6 +47,11 @@ function App() {
               <Route path='/adform' element={
                 <>
                   <CreateAdForm />
+                </>
+              } />
+              <Route path='/ads/:id/edit' element={
+                <>
+                  <EditAdForm />
                 </>
               } />
               <Route path='/login' element={

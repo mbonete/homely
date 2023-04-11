@@ -9,7 +9,7 @@ import { useAPI } from '../../hooks/useAPI';
 function Header() {
   const { isLoggedIn, currentUser } = useAPI();
   const { id, name } = currentUser || {};
-
+  const userInitials = name?.charAt(0).toUpperCase() + name?.charAt(1).toUpperCase();
   return (
     <Wrapper>
       <MaxWidthWrapper>
@@ -30,7 +30,7 @@ function Header() {
             </LinkButton>
             <Span>Hello {name}!</Span>
             <Link to={`/users/${id}`} style={{textDecoration: 'none'}}>
-              <Avatar sx={{ bgcolor: 'white', color: 'navy'}}>MB</Avatar>
+              <Avatar sx={{ bgcolor: 'white', color: 'navy'}}>{userInitials}</Avatar>
             </Link>
           </>
         ) : (

@@ -18,20 +18,19 @@ function MyAds() {
 
   const myAds = data?.filter((ad) => ad.userId === currentUser.id);
 
-  console.log(myAds);
 
   if (isLoading) return <p>Loading...</p>;
   if (!myAds.length) return (
     <div>
       <p>No ads published yet</p>
-        <LinkButton to='/adform' style={{backgroundColor: 'orange', borderRadius: '50px', marginRight: '16px'}}>
+        <LinkButton to='/adform' style={{width: 'fit-content', backgroundColor: 'orange', borderRadius: '50px', marginRight: '16px'}}>
           <AddHomeOutlinedIcon style={{fontSize: '1.75rem', marginBottom: '4px', marginRight: '4px'}} />
           List your property
         </LinkButton>
     </div>
     
   )
-  return <AdsList ads={myAds} />;
+  return <AdsList ads={myAds}/>;
 }
 
 export default MyAds;

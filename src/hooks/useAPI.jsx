@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import ErrorMessage from '../components/ErrorMessage/ErrorMessage';
+
 
 const APIContext = React.createContext();
 
@@ -17,9 +17,7 @@ export function APIProvider({children}) {
   }
 
   const [currentUser, setCurrentUser] = useState(null);
-
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-
 
   useEffect(() => {
     const token =  localStorage.getItem('token');
@@ -32,11 +30,9 @@ export function APIProvider({children}) {
   }, []);
 
   const login = async (credentials) => {
+
     const response = await client.post('/tokens', credentials);
-    if(response.status === 401) {
-      console.log('Email or password are incorrect');
-      return;
-    };
+
     const { accessToken } = response.data;
     const { user } = response.data;
     setIsLoggedIn(true);  
@@ -72,12 +68,17 @@ export function APIProvider({children}) {
     return client.get('/ads');
   }
 
+  const getAd = (id) => {
+    return client.get(`/ads/${id}`)
+  }
+
   const value = {
     login,
     logout,
     createUser,
     createAd,
     getAds,
+    getAd,
     isLoggedIn,
     currentUser,
   }
