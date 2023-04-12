@@ -1,5 +1,6 @@
 import * as React from 'react';
-import styled from 'styled-components'
+import styled from 'styled-components';
+import { useNavigate } from 'react-router';
 import IconButton from '@mui/material/IconButton';
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
@@ -15,13 +16,18 @@ import { DateTime} from 'luxon';
 import DropdownMenu from '../DropdownMenu/DropdownMenu';
 import { useAPI } from '../../hooks/useAPI';
 
-
 export default function AdCard({ ad }) {
-  const { currentUser } = useAPI();
+  const { currentUser, getAd } = useAPI();
   const { id, title, summary, details, createdAt, userId } = ad;
   const { name } = currentUser || {};
   const myInitials = name?.charAt(0).toUpperCase() + name?.charAt(1).toUpperCase();
+  const navigate = useNavigate();
 
+  const handleSelectAd = async () => {
+    await getAd(id);
+    navigate(`/ads/${id}`);
+  }
+  
   const localizedCreatedAt = DateTime
     .fromISO(createdAt)
     .toLocaleString();
@@ -29,7 +35,7 @@ export default function AdCard({ ad }) {
   const avatarType = currentUser?.id === userId ? myInitials : 'JD';
 
   return (
-    <Card sx={{ width: '100%', height: '100%', margin: '16px', }} id={id}>
+    <Card sx={{ width: '100%', height: '100%', margin: '16px', }} id={id} >
       <CardHeader
         avatar={
           <Avatar sx={{ bgcolor: 'navy'}}>{avatarType}</Avatar>
@@ -43,10 +49,12 @@ export default function AdCard({ ad }) {
         subheader={localizedCreatedAt}
       />
       <CardMedia
+        onClick={handleSelectAd}
         component="img"
         height='300'
         image="/apartment1.jpg"
         alt="bedroom apartment"
+        style={{cursor: 'pointer'}}
       />
       <CardContent>
         <Typography variant="body2" color="text.secondary">

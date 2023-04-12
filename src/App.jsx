@@ -15,7 +15,8 @@ import AllAdsList from "./components/AllAdsList/AllAdsList";
 import CreateAdForm from "./components/CreateAdForm/CreateAdForm";
 import SideBar from "./components/SideBar/SideBar"
 import MyAds from "./components/MyAds/MyAds";
-import EditAdForm from "./components/EditAdForm/EditAdForm";
+import SelectedAd from "./components/SelectedAd/SelectedAd";
+import EditAdForm from './components/EditAdForm/EditAdForm'
 
 function App() {
   return (
@@ -54,6 +55,11 @@ function App() {
                   <EditAdForm />
                 </>
               } />
+              <Route path='/ads/:id' element={
+                <>
+                  <SelectedAd />
+                </>
+              } />
               <Route path='/login' element={
                 <>
                   <ImageGallery/>
@@ -87,6 +93,7 @@ const Wrapper = styled.div`
   min-height: 100%;
   width: 100%;
   justify-content: space-between;
+  position: relative;
 `;
 
 export default App
