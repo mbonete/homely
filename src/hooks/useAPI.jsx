@@ -76,6 +76,10 @@ export function APIProvider({children}) {
     return client.put(`ads/${id}`, updatedFields)
   }
 
+  const deleteAd = (id) => {
+    return client.delete(`/ads/${id}`)
+  }
+
   const value = {
     login,
     logout,
@@ -84,6 +88,7 @@ export function APIProvider({children}) {
     getAds,
     getAd,
     editAd,
+    deleteAd,
     isLoggedIn,
     currentUser,
   }

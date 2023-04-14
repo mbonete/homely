@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import AdCard from '../AdCard/AdCard';
 
 function AdsList({ ads }) {
-
   return (
     <Wrapper>
       {

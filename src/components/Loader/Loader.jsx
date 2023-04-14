@@ -6,7 +6,7 @@ export default function Loader() {
   return(
     <Wrapper>
       <IconWrapper>
-        <FaSpinner style={{height: '100px', width: '100px', color: 'navy'}}/>
+        <FaSpinner style={{height: '50px', width: '50px', color: 'navy'}}/>
       </IconWrapper>
     </Wrapper>
     
@@ -16,7 +16,7 @@ export default function Loader() {
 const Wrapper = styled.div`
   width: 100%;
   height: 100%;
-  background-color: hsla(0, 0%, 39%, 0.33);
+  background-color: hsla(0, 0%, 70%, 0.33);
   position: absolute;
   top: 0;
   display: flex;

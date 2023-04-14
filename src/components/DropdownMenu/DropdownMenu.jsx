@@ -4,18 +4,18 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import { useAPI } from '../../hooks/useAPI';
 import { useNavigate } from 'react-router-dom';
+import AlertDialog from '../AlertDialog/AlertDialog';
 
-let i = 0;
 
-function DropdownMenu({children, userId, adId}) {
-  const { currentUser } = useAPI();
+function DropdownMenu({children, userId, adId, onDelete}) {
+  const { currentUser, deleteAd } = useAPI();
   const [isMyAd, setIsMyAd] = useState(false);
   const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = useState(null);
-
   useEffect(() => {
     setIsMyAd(currentUser?.id === userId);
   }, [currentUser?.id, userId]);
+
 
 
   const isOpen = Boolean(anchorEl);
@@ -28,9 +28,17 @@ function DropdownMenu({children, userId, adId}) {
     setAnchorEl(null);
   };
 
+
   const ownerMenu = [
     <MenuItem key="edit" onClick={() => navigate(`/ads/${adId}/edit`)}>Edit</MenuItem>,
-    <MenuItem key="delete" onClick={() => navigate(`/ads`)}>Delete</MenuItem>
+    <MenuItem key="delete">
+      <AlertDialog 
+        title={'Delete'}
+        question={'Are you sure you want to delete this ad?'}
+        description={'Once you delete this ad it will disappear permanently'} 
+        callback={() => deleteAd(adId)} 
+      />
+    </MenuItem>
   ];
 
   const genericMenu = [
