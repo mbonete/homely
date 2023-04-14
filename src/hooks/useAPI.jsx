@@ -61,7 +61,10 @@ export function APIProvider({children}) {
   const createUser = (user) => client.post('/users', user);
 
   const createAd = (ad) => {
-    return client.post('/ads', ad);
+    return client.post('/ads', ad, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+    }});
   }
 
   const getAds = () => {

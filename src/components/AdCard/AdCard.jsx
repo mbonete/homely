@@ -18,8 +18,9 @@ import { useAPI } from '../../hooks/useAPI';
 
 export default function AdCard({ ad }) {
   const { currentUser, getAd } = useAPI();
-  const { id, title, summary, details, createdAt, userId } = ad;
+  const { id, title, summary, details, createdAt, userId, images } = ad;
   const { name } = currentUser || {};
+  const coverUrl = images[0] ? `http://localhost:3000/ad-image/${images[0].fileId}` : "/apartment1.jpg";
   const myInitials = name?.charAt(0).toUpperCase() + name?.charAt(1).toUpperCase();
   const navigate = useNavigate();
 
@@ -51,8 +52,8 @@ export default function AdCard({ ad }) {
       <CardMedia
         onClick={handleSelectAd}
         component="img"
-        height='300'
-        image="/apartment1.jpg"
+        height='500'
+        image={coverUrl}
         alt="bedroom apartment"
         style={{cursor: 'pointer'}}
       />

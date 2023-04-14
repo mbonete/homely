@@ -24,6 +24,6 @@ function SelectedAd() {
 }
 
 const Wrapper = styled.div`
-  width: 50%;
+  width: 40%;
 `;
 export default SelectedAd;

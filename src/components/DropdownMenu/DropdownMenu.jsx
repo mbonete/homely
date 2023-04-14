@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import AlertDialog from '../AlertDialog/AlertDialog';
 
 
-function DropdownMenu({children, userId, adId, onDelete}) {
+function DropdownMenu({children, userId, adId}) {
   const { currentUser, deleteAd } = useAPI();
   const [isMyAd, setIsMyAd] = useState(false);
   const navigate = useNavigate();

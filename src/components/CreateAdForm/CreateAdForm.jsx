@@ -33,8 +33,37 @@ export default function CreateAdForm() {
   const { createAd } = useAPI();
 
   const theme = createTheme();
-  const onSubmit = async (fields) => {
-    delete fields.file;
+  const onSubmit = async (formValues) => {
+    const fields = new FormData();
+
+    /*
+      We have two kinds of fields in formValues:
+      - Normal fields
+      - A FileList field
+
+      The FileList field can not be added to the FormData
+      as the others, so we need to extract it, append the
+      others and finally, the FileList contents
+    */
+    
+    // Store the images content to use it later
+    const images = formValues.images;
+    // ...and remove it from the general form values
+    delete formValues.images;
+    // Store the normal values inside the FormData
+    Object.keys(formValues).forEach((key) => fields.append(key, formValues[key]));
+
+    // Now we process the images
+    for (const image of images) {
+      fields.append('images', image);
+    }
+
+    /*
+    for (let i=0; i < images.length; i++) {
+      fields.append('images', images[i]);
+    }
+    */
+
     const { data } = await createAd(fields);
     navigate('/ads');
   }
@@ -85,8 +114,8 @@ export default function CreateAdForm() {
                 {errors?.details && <ErrorMessage>{errors.details.message}</ErrorMessage>}
               </Grid>
               <Grid item xs={12}>
-                <label htmlFor="file" style={{color: 'gray'}}>Upload picture:</label>
-                <input type='file' {...register('file')} style={{color: 'gray', padding: '0 8px'}}/>  
+                <label htmlFor="images" style={{color: 'gray'}}>Upload picture:</label>
+                <input type='file' {...register('images')} style={{color: 'gray', padding: '0 8px'}}/>  
               </Grid>
             </Grid>
            

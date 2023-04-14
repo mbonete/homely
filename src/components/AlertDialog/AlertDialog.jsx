@@ -30,9 +30,11 @@ export default function AlertDialog({title, question, description, callback}) {
 
   return (
     <div>
-      <Button style={{textDecoration: 'none', margin: '0'}} onClick={handleClickOpen}>
+      <button 
+        style={{textDecoration: 'none', border: 'transparent', padding: '0', margin: '0', backgroundColor: 'transparent'}} 
+        onClick={handleClickOpen}>
         {title}
-      </Button>
+      </button>
       <Dialog
         open={open}
         onClose={handleClose}
