@@ -47,7 +47,8 @@ export default function CreateAdForm() {
     */
     
     // Store the images content to use it later
-    const images = formValues.images;
+    const images = formValues.images || [];
+    console.log('debug', 'images', images)
     // ...and remove it from the general form values
     delete formValues.images;
     // Store the normal values inside the FormData
@@ -65,7 +66,8 @@ export default function CreateAdForm() {
     */
 
     const { data } = await createAd(fields);
-    navigate('/ads');
+    console.log(data);
+    navigate(`/ads/${data?.id}`);
   }
 
   return (
