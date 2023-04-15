@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useQueryClient } from '@tanstack/react-query';
 import IconButton from '@mui/material/IconButton';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
@@ -7,19 +8,20 @@ import { useNavigate } from 'react-router-dom';
 import AlertDialog from '../AlertDialog/AlertDialog';
 
 
+
 function DropdownMenu({children, userId, adId}) {
   const { currentUser, deleteAd } = useAPI();
   const [isMyAd, setIsMyAd] = useState(false);
+  const [isDeleteConfirmationOpen, setIsDeleteConfirmationOpen] = useState(false);
   const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = useState(null);
+  const queryClient = useQueryClient();
+
   useEffect(() => {
     setIsMyAd(currentUser?.id === userId);
   }, [currentUser?.id, userId]);
 
-
-
   const isOpen = Boolean(anchorEl);
-
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -28,23 +30,25 @@ function DropdownMenu({children, userId, adId}) {
     setAnchorEl(null);
   };
 
-
   const ownerMenu = [
     <MenuItem key="edit" onClick={() => navigate(`/ads/${adId}/edit`)}>Edit</MenuItem>,
-    <MenuItem key="delete">
-      <AlertDialog 
-        title={'Delete'}
-        question={'Are you sure you want to delete this ad?'}
-        description={'Once you delete this ad it will disappear permanently'} 
-        callback={() => deleteAd(adId)} 
-      />
-    </MenuItem>
+    <MenuItem style={{position: 'relative'}} key="delete" onClick={() => setIsDeleteConfirmationOpen(true)}>Delete</MenuItem>
+    
   ];
 
   const genericMenu = [
     <MenuItem key="report" onClick={() => navigate(`/ads`)}>Report</MenuItem>,
     <MenuItem key="view-profile" onClick={() => navigate(`/ads`)}>View profile</MenuItem>
   ];
+
+  const onConfirmationResponse = async (response) => {
+    setIsDeleteConfirmationOpen(false);
+
+    if (response === true) {
+      await deleteAd(adId);
+      queryClient.refetchQueries({ queryKey: ['ads'] })
+    }    
+  }
 
   return (
     <div>
@@ -68,6 +72,13 @@ function DropdownMenu({children, userId, adId}) {
       >
         {isMyAd ? ownerMenu : genericMenu }
       </Menu>
+      {isDeleteConfirmationOpen && (
+        <AlertDialog
+          question={'Are you sure?'}
+          description={'This ad will be deleted permanently'}
+          onResponse={onConfirmationResponse}
+        />
+      )}
     </div>
   );
 }

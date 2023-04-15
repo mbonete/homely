@@ -4,9 +4,10 @@ import { useNavigate } from 'react-router-dom';
 
 
 const APIContext = React.createContext();
+const BASE_URL = 'http://10.3.0.70:3000';
 
 const client = axios.create({
-  baseURL: 'http://localhost:3000',
+  baseURL: BASE_URL,
 });
 
 export function APIProvider({children}) {
@@ -94,6 +95,7 @@ export function APIProvider({children}) {
     deleteAd,
     isLoggedIn,
     currentUser,
+    BASE_URL,
   }
 
   return (

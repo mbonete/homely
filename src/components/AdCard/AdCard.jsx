@@ -17,10 +17,10 @@ import DropdownMenu from '../DropdownMenu/DropdownMenu';
 import { useAPI } from '../../hooks/useAPI';
 
 export default function AdCard({ ad }) {
-  const { currentUser, getAd } = useAPI();
+  const { currentUser, getAd, BASE_URL } = useAPI();
   const { id, title, summary, details, createdAt, userId, images } = ad;
   const { name } = currentUser || {};
-  const coverUrl = images[0] ? `http://localhost:3000/ad-image/${images[0].fileId}` : "/apartment1.jpg";
+  const coverUrl = images[0] ? `${BASE_URL}/ad-image/${images[0].fileId}` : "/apartment1.jpg";
   const myInitials = name?.charAt(0).toUpperCase() + name?.charAt(1).toUpperCase();
   const navigate = useNavigate();
 
