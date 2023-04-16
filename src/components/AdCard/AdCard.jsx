@@ -59,12 +59,11 @@ export default function AdCard({ ad }) {
       />
       <CardContent>
         <Typography variant="body2" color="text.secondary">
-          {summary}
+          {details}
         </Typography>
         <ActionsWrapper>
           <DetailsWrapper>
-            <Typography paragraph variant="body2" style={{marginBottom: '4px'}}>Property details:</Typography>
-            <Typography paragraph variant="body2" style={{marginBottom: '4px'}}>{details}</Typography>
+            <Typography paragraph variant="body2" style={{marginBottom: '4px'}}>{summary}</Typography>
           </DetailsWrapper>
           <CardActions disableSpacing>
             <IconButton aria-label="add to favorites">

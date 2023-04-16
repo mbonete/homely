@@ -17,7 +17,7 @@ function AdsList({ ads }) {
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  width: 40%;
+  width: 45%;
   min-height: 100%;
 `;
 export default AdsList;

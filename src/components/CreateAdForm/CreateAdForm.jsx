@@ -97,23 +97,23 @@ export default function CreateAdForm() {
 
               <Grid item xs={12}>
                 <TextField
-                  {...register('summary')}
-                  placeholder='Summary'
-                  fullWidth
-                  multiline
-                  rows={2}
-                />
-                {errors?.summary && <ErrorMessage>{errors.summary.message}</ErrorMessage>}
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
                   {...register('details')}
                   placeholder='Details'
                   fullWidth
                   multiline
-                  rows={4}
+                  rows={2}
                 />
                 {errors?.details && <ErrorMessage>{errors.details.message}</ErrorMessage>}
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  {...register('summary')}
+                  placeholder='Summary'
+                  fullWidth
+                  multiline
+                  rows={4}
+                />
+                {errors?.summary && <ErrorMessage>{errors.summary.message}</ErrorMessage>}
               </Grid>
               <Grid item xs={12}>
                 <label htmlFor="images" style={{color: 'gray'}}>Upload picture:</label>

@@ -16,7 +16,7 @@ function AllAdsList() {
   );
 
   if (isLoading) return <Loader />;
-  return <AdsList ads={data} />;
+  return <AdsList ads={data}/>;
 }
 
 export default AllAdsList;

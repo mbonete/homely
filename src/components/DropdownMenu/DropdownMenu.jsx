@@ -46,7 +46,8 @@ function DropdownMenu({children, userId, adId}) {
 
     if (response === true) {
       await deleteAd(adId);
-      queryClient.refetchQueries({ queryKey: ['ads'] })
+      queryClient.invalidateQueries('ads');
+      queryClient.refetchQueries({ queryKey: ['ads'] });
       navigate('/ads');
     }    
   }

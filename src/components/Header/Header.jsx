@@ -12,13 +12,15 @@ function Header() {
   const userInitials = name?.charAt(0).toUpperCase() + name?.charAt(1).toUpperCase();
   return (
     <Wrapper>
-      <MaxWidthWrapper>
+
         <NavWrapper>
           <LogoAnchor to='/' alt='brand logo anchor'>
             Homely
           </LogoAnchor>
-          <LinkButton to='/ads' style={{backgroundColor: 'transparent', color: 'white', padding: '0'}}>All ads</LinkButton>
-          {isLoggedIn && <LinkButton style={{backgroundColor: 'transparent', color: 'white', padding: '0'}} to={`/users/${currentUser.id}/ads`}>My ads</LinkButton>}
+          <NavLinks>
+            <LinkButton to='/ads' style={{backgroundColor: 'transparent', color: 'white', padding: '0'}}>All ads</LinkButton>
+            {isLoggedIn && <LinkButton style={{backgroundColor: 'transparent', color: 'white', padding: '0'}} to={`/users/${currentUser.id}/ads`}>My ads</LinkButton>}
+          </NavLinks>
         </NavWrapper>
 
         <ButtonWrapper>
@@ -40,7 +42,7 @@ function Header() {
           </>  
         )}
         </ButtonWrapper>
-      </MaxWidthWrapper>
+      
     </Wrapper>
   ) 
 }
@@ -53,25 +55,18 @@ const Wrapper = styled.div`
   top: 0;
   z-index: 2;
   isolation: isolate;
-`;
-
-
-const MaxWidthWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 100%;
-  height: 100%;
-  max-width: 1900px;
-  padding: 8px 16px;
-  margin: 0 auto;
+  padding: 16px 32px;
 `;
 
 const LogoAnchor = styled(Link)`
+  font-family: 'Aleo', serif;
   display: flex;
   text-decoration: none;
   background-color: transparent;
-  font-size: 2rem;
+  font-size: 2.5rem;
   color: white;
   border: transparent;
   cursor: pointer;
@@ -82,10 +77,15 @@ const LogoAnchor = styled(Link)`
 
 const NavWrapper = styled.nav`
   display: flex;
-  gap: 16px;
+  gap: 72px;
   align-items: baseline;
   justify-content: flex-start;
   width: 50%;
+`;
+
+const NavLinks = styled.div`
+  display: flex;
+  align-items: baseline;
 `;
 
 const ButtonWrapper = styled.div`
