@@ -1,7 +1,8 @@
 "use client"
 
 import Link from "next/link"
-import { useFormState, useFormStatus } from "react-dom"
+import { useActionState } from "react"
+import { useFormStatus } from "react-dom"
 import { ArrowLeft, PlusCircle } from "lucide-react"
 
 import { createAdAction } from "@/lib/actions/ads"
@@ -21,7 +22,7 @@ function SubmitButton() {
 }
 
 export default function CreateAdForm() {
-  const [state, formAction] = useFormState(createAdAction, null)
+  const [state, formAction] = useActionState(createAdAction, null)
   const fieldErrors = state?.fieldErrors || {}
 
   return (

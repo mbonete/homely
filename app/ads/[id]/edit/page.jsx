@@ -6,9 +6,10 @@ import EditAdForm from "@/components/EditAdForm/EditAdForm"
 export const dynamic = "force-dynamic"
 
 export default async function EditAdPage({ params }) {
+  const { id } = await params
   const user = await requireUser()
-  const ad = await getAdById(params.id)
+  const ad = await getAdById(id)
   if (!ad) notFound()
-  if (String(ad.userId) !== String(user.id)) redirect(`/ads/${params.id}`)
+  if (String(ad.userId) !== String(user.id)) redirect(`/ads/${id}`)
   return <EditAdForm ad={ad} />
 }

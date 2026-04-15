@@ -7,7 +7,8 @@ import SelectedAdClient from "@/components/SelectedAd/SelectedAdClient"
 export const dynamic = "force-dynamic"
 
 export default async function AdDetailPage({ params }) {
-  const [ad, session] = await Promise.all([getAdById(params.id), auth()])
+  const { id } = await params
+  const [ad, session] = await Promise.all([getAdById(id), auth()])
   if (!ad) notFound()
   return <SelectedAdClient ad={ad} currentUserId={session?.user?.id} />
 }

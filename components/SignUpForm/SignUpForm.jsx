@@ -1,7 +1,8 @@
 "use client"
 
 import Link from "next/link"
-import { useFormState, useFormStatus } from "react-dom"
+import { useActionState } from "react"
+import { useFormStatus } from "react-dom"
 import { Home } from "lucide-react"
 
 import { signupAction } from "@/lib/actions/auth"
@@ -21,7 +22,7 @@ function SubmitButton() {
 }
 
 export default function SignUpForm() {
-  const [state, formAction] = useFormState(signupAction, null)
+  const [state, formAction] = useActionState(signupAction, null)
   const fieldErrors = state?.fieldErrors || {}
 
   return (

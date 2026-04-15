@@ -1,7 +1,8 @@
 "use client"
 
 import Link from "next/link"
-import { useFormState, useFormStatus } from "react-dom"
+import { useActionState } from "react"
+import { useFormStatus } from "react-dom"
 import { ArrowLeft, Pencil } from "lucide-react"
 
 import { updateAdAction } from "@/lib/actions/ads"
@@ -22,7 +23,7 @@ function SubmitButton() {
 
 export default function EditAdForm({ ad }) {
   const updateWithId = updateAdAction.bind(null, ad.id)
-  const [state, formAction] = useFormState(updateWithId, null)
+  const [state, formAction] = useActionState(updateWithId, null)
   const fieldErrors = state?.fieldErrors || {}
 
   return (

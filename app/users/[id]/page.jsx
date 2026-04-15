@@ -13,8 +13,9 @@ import { Separator } from "@/components/ui/separator"
 export const dynamic = "force-dynamic"
 
 export default async function ProfilePage({ params }) {
+  const { id } = await params
   const sessionUser = await requireUser()
-  const profile = await getUserById(params.id)
+  const profile = await getUserById(id)
   if (!profile) notFound()
 
   const isSelf = String(profile.id) === String(sessionUser.id)

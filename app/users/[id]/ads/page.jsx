@@ -12,11 +12,12 @@ import { Button } from "@/components/ui/button"
 export const dynamic = "force-dynamic"
 
 export default async function UserAdsPage({ params }) {
-  const owner = await getUserById(params.id)
+  const { id } = await params
+  const owner = await getUserById(id)
   if (!owner) notFound()
 
   const [userAds, session] = await Promise.all([
-    listAdsByUser(params.id),
+    listAdsByUser(id),
     auth(),
   ])
   const isSelf = session?.user?.id && String(session.user.id) === String(owner.id)
