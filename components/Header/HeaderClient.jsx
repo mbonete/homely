@@ -1,12 +1,12 @@
-"use client"
+"use client";
 
-import Link from "next/link"
-import { Menu, PlusCircle, LogOut, User as UserIcon } from "lucide-react"
+import Link from "next/link";
+import { Menu, PlusCircle, LogOut, User as UserIcon } from "lucide-react";
 
-import { logoutAction } from "@/lib/actions/auth"
-import { Logo } from "@/components/ui/logo"
-import { Button } from "@/components/ui/button"
-import { Avatar, AvatarFallback } from "@/components/ui/avatar"
+import { logoutAction } from "@/lib/actions/auth";
+import { Logo } from "@/components/ui/logo";
+import { Button } from "@/components/ui/button";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -14,7 +14,7 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
+} from "@/components/ui/dropdown-menu";
 import {
   Sheet,
   SheetContent,
@@ -22,46 +22,40 @@ import {
   SheetTitle,
   SheetTrigger,
   SheetClose,
-} from "@/components/ui/sheet"
+} from "@/components/ui/sheet";
 
 export default function HeaderClient({ user }) {
-  const isLoggedIn = !!user
-  const initials = user?.name
-    ? user.name
-        .split(" ")
-        .map((part) => part[0])
-        .filter(Boolean)
-        .slice(0, 2)
-        .join("")
-        .toUpperCase()
-    : ""
+  const isLoggedIn = !!user;
 
   return (
     <header className="sticky top-0 z-40 w-full border-b border-border/60 bg-background/80 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="mx-auto flex h-16 w-full max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center gap-8">
+        <div className="flex items-center">
           <Link
             href="/"
             className="flex items-center gap-2 font-display text-2xl font-semibold tracking-tight text-foreground"
             aria-label="Homely home"
           >
             <Logo className="h-8 w-8" />
-            Homely
+            <span>Homely</span>
           </Link>
 
-          <nav className="hidden items-center gap-6 md:flex" aria-label="Primary">
+          <nav
+            className="ml-10 hidden items-center gap-1 md:flex"
+            aria-label="Primary"
+          >
             <Link
               href="/ads"
-              className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+              className="rounded-md px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
             >
               Browse
             </Link>
             {isLoggedIn ? (
               <Link
                 href={`/users/${user.id}/ads`}
-                className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+                className="rounded-md px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
               >
-                My ads
+                My listings
               </Link>
             ) : null}
           </nav>
@@ -83,9 +77,9 @@ export default function HeaderClient({ user }) {
                     className="rounded-full outline-none ring-offset-background transition focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
                     aria-label="Open user menu"
                   >
-                    <Avatar className="h-9 w-9 border border-border">
+                    <Avatar className="h-8 w-8 border border-border">
                       <AvatarFallback className="bg-secondary text-secondary-foreground">
-                        {initials || <UserIcon className="h-4 w-4" />}
+                        <UserIcon className="h-4 w-4" />
                       </AvatarFallback>
                     </Avatar>
                   </button>
@@ -216,5 +210,5 @@ export default function HeaderClient({ user }) {
         </Sheet>
       </div>
     </header>
-  )
+  );
 }
