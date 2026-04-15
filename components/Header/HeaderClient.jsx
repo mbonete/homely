@@ -95,13 +95,10 @@ export default function HeaderClient({ user }) {
                   </DropdownMenuLabel>
                   <DropdownMenuSeparator />
                   <DropdownMenuItem asChild>
-                    <Link href={`/users/${user.id}`}>
-                      <UserIcon className="mr-2 h-4 w-4" />
-                      Profile
-                    </Link>
+                    <Link href={`/users/${user.id}`}>Profile</Link>
                   </DropdownMenuItem>
                   <DropdownMenuItem asChild>
-                    <Link href={`/users/${user.id}/ads`}>My ads</Link>
+                    <Link href={`/users/${user.id}/ads`}>My listings</Link>
                   </DropdownMenuItem>
                   <DropdownMenuSeparator />
                   <DropdownMenuItem asChild>
@@ -156,7 +153,7 @@ export default function HeaderClient({ user }) {
                       href={`/users/${user.id}/ads`}
                       className="rounded-md px-3 py-2 text-sm font-medium hover:bg-accent"
                     >
-                      My ads
+                      My listingss
                     </Link>
                   </SheetClose>
                   <SheetClose asChild>
