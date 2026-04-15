@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { useActionState } from "react";
 import { useFormStatus } from "react-dom";
-import { Home } from "lucide-react";
 
 import { signupAction } from "@/lib/actions/auth";
 import ErrorMessage from "../ErrorMessage/ErrorMessage";

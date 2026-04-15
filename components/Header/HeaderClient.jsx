@@ -1,9 +1,10 @@
 "use client"
 
 import Link from "next/link"
-import { Home, Menu, PlusCircle, LogOut, User as UserIcon } from "lucide-react"
+import { Menu, PlusCircle, LogOut, User as UserIcon } from "lucide-react"
 
 import { logoutAction } from "@/lib/actions/auth"
+import { Logo } from "@/components/ui/logo"
 import { Button } from "@/components/ui/button"
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 import {
@@ -44,9 +45,7 @@ export default function HeaderClient({ user }) {
             className="flex items-center gap-2 font-display text-2xl font-semibold tracking-tight text-foreground"
             aria-label="Homely home"
           >
-            <span className="flex h-8 w-8 items-center justify-center rounded-md bg-primary text-primary-foreground">
-              <Home className="h-4 w-4" aria-hidden="true" />
-            </span>
+            <Logo className="h-8 w-8" />
             Homely
           </Link>
 
