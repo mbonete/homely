@@ -48,7 +48,7 @@ export default function CreateAdForm() {
 
       <Card>
         <CardContent className="p-6 sm:p-8">
-          <form action={formAction} className="space-y-6" noValidate encType="multipart/form-data">
+          <form action={formAction} className="space-y-6" noValidate>
             <div className="space-y-2">
               <Label htmlFor="title">Title</Label>
               <Input
