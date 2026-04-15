@@ -1,16 +1,17 @@
 const items = [
-  "/apartment1.jpg",
-  "/apartment2.jpg",
-  "/apartment3.jpg",
-  "/apartment4.jpg",
-  "/apartment5.jpg",
-  "/apartment6.jpg",
-]
+  "/apartment1.webp",
+  "/apartment2.webp",
+  "/apartment3.webp",
+  "/apartment4.webp",
+  "/apartment5.webp",
+  "/apartment6.webp",
+  "/apartment7.webp",
+];
 
 export default function ImageGallery() {
   return (
     <div className="hidden h-full lg:block">
-      <div className="relative grid h-full grid-cols-2 grid-rows-3 gap-3 overflow-hidden rounded-2xl">
+      <div className="relative grid h-full grid-cols-2 grid-rows-4 gap-3 overflow-hidden rounded-2xl">
         {items.map((src, idx) => (
           <div
             key={src}
@@ -30,5 +31,5 @@ export default function ImageGallery() {
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-background/40" />
       </div>
     </div>
-  )
+  );
 }

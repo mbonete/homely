@@ -11,7 +11,7 @@ import { Button } from "@/components/ui/button"
 
 export default function AdCard({ ad, currentUserId }) {
   const { id, title, summary, createdAt, userId, images, owner } = ad
-  const coverUrl = images?.[0]?.src || "/apartment1.jpg"
+  const coverUrl = images?.[0]?.src || "/apartment1.webp"
 
   const isMine = currentUserId != null && String(currentUserId) === String(userId)
   const initials = (owner?.name || "JD")

@@ -36,35 +36,35 @@ async function main() {
       summary: "Bright, cozy, walking distance to everything.",
       details:
         "Fully furnished apartment with a south-facing balcony, modern kitchen and a quiet bedroom. Perfect for couples or small families.",
-      cover: "/apartment1.jpg",
+      cover: "/apartment1.webp",
     },
     {
       title: "Modern loft with skyline views",
       summary: "Industrial chic loft in the creative district.",
       details:
         "Exposed brick, high ceilings, floor-to-ceiling windows. Gym and rooftop terrace in the building.",
-      cover: "/apartment2.jpg",
+      cover: "/apartment2.webp",
     },
     {
       title: "Charming studio near the park",
       summary: "Quiet studio apartment with great morning light.",
       details:
         "Renovated kitchenette, hardwood floors, newly installed double-glazed windows. Two minutes from the park entrance.",
-      cover: "/apartment3.jpg",
+      cover: "/apartment3.webp",
     },
     {
       title: "Family home with garden",
       summary: "Three bedrooms, private garden, close to schools.",
       details:
         "Spacious family home with a large fenced garden, garage, and fully equipped kitchen. Excellent public transit links.",
-      cover: "/apartment4.jpg",
+      cover: "/apartment4.webp",
     },
     {
       title: "Beachfront condo with sea views",
       summary: "Wake up to the sound of the waves every morning.",
       details:
         "One-bedroom condo steps from the beach, private balcony, shared pool and direct beach access.",
-      cover: "/apartment5.jpg",
+      cover: "/apartment5.webp",
     },
   ]
 

@@ -34,7 +34,7 @@ export default function SelectedAdClient({ ad, currentUserId }) {
   const imageUrls =
     ad.images && ad.images.length > 0
       ? ad.images.map((img) => img.src)
-      : ["/apartment1.jpg"]
+      : ["/apartment1.webp"]
   const activeImage = imageUrls[activeImageIdx] || imageUrls[0]
 
   const localizedCreatedAt = ad.createdAt
